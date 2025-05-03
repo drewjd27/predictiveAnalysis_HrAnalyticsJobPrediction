@@ -39,7 +39,7 @@ Untuk mencapai tujuan tersebut, penelitian ini akan melakukan analisis terhadap 
 
 ## 3. Data Understanding
 
-Dataset yang digunakan merupakan dataset sekunder yang didapat dari situs Kaggle dengan nama [Hr Analytics Job Prediction](https://www.kaggle.com/datasets/mfaisalqureshi/hr-analytics-and-job-prediction/data). Dataset ini terdiri dari 10 fitur utama, yaitu:
+Dataset yang digunakan merupakan dataset sekunder yang didapat dari situs Kaggle dengan nama [Hr Analytics Job Prediction](https://www.kaggle.com/datasets/mfaisalqureshi/hr-analytics-and-job-prediction/data). Dataset ini terdiri dari 14999 baris dan 10 fitur. Fitur tersebut yaitu:
 - **satisfaction_level**: Tingkat kepuasan kerja karyawan.
 - **last_evaluation**: Skor evaluasi terakhir karyawan.
 - **number_project**: Jumlah proyek yang telah dikerjakan.
@@ -51,19 +51,76 @@ Dataset yang digunakan merupakan dataset sekunder yang didapat dari situs Kaggle
 - **salary**: Tingkat gaji karyawan (low, medium, high).
 - **left**: Status resign karyawan (0: tidak, 1: iya).
 
-Adapun rangkuman dari dataset ini dapat dilihat pada gambar berikut
+### 3.1. Deskripsi Variabel
+
+Adapun rangkuman tipe data dari dataset ini dapat dilihat pada gambar berikut
+
+| ![Screenshot (144)](https://github.com/user-attachments/assets/88fa8b9b-fb37-4a76-af96-413a526a4bb1) | 
+|:--:| 
+| *Rangkuman Tipe Data pada Dataset Awal* |
+
+Data didominasi oleh tipe data numerik. Peneliti melihat beberapa penamaan label yang perlu diperbaiki, seperti `Work_accident`, `average_montly_hours`, dan `Department`.
+
+Untuk rangkuman dekskripsi statistik dari datasetnya dapat dilihat dari gambar berikut
+
+| ![Screenshot (144)](https://github.com/user-attachments/assets/514a7c89-1518-4f88-ac81-734c7b56b3bb) | 
+|:--:| 
+| *Rangkuman Dekskripsi Statistik Dataset Awal* |
+
+| Fitur                    | Insight                                                                                  |
+|--------------------------|------------------------------------------------------------------------------------------|
+| **Satisfaction Level**   | Rata-rata 0.61, distribusi sedang. Ada karyawan sangat tidak puas (0.09) hingga sangat puas (1.0). |
+| **Last Evaluation**      | Rata-rata 0.72, menunjukkan sebagian besar memiliki evaluasi baik. Distribusinya cenderung normal. |
+| **Number of Projects**   | Rata-rata 3.8 proyek. Kisaran 2–7 proyek. Perlu analisis apakah beban kerja berlebih memicu churn. |
+| **Average Monthly Hours**| Rata-rata 201 jam/bulan. Beberapa bekerja sangat banyak (hingga 310 jam/bulan). Indikasi overwork. |
+| **Time Spent at Company**| Rata-rata 3.5 tahun. Sebagian besar berada di 2–4 tahun masa kerja.                        |
+| **Work Accident**        | 14% karyawan mengalami kecelakaan kerja. Mayoritas tidak pernah mengalami kecelakaan.     |
+| **Left (Turnover)**      | 24% karyawan telah keluar dari perusahaan. Bisa menjadi target variabel dalam prediksi churn. |
+| **Promotion (5 years)**  | Hanya 2.1% yang mendapat promosi dalam 5 tahun. Menunjukkan peluang promosi sangat kecil.  |
 
 
+## 4. Exploratory Data Analysis (EDA)
+
+Pada tahap ini, peneliti melakukan ekplorasi pada dataset untuk memahami distribusi data dan hubungan antar fitur. 
+
+### 4.1. Data Cleaning
+Sebelum melakukan analisis data, peneliti melakukan pengecekan kebersihan data terlebih dahulu. Seperti mengubah nama kolom, mengecek missing values, mengecek data duplikat, mengecek tipe data yang tidak tepat, dan mengecek outliers.
+
+#### 4.1.1. Ubah Nama Kolom
+Peneliti mengubah nama kolom dari fitur `Work_accident`, `average_montly_hours`, dan `Department` menjadi `work_accident`, `average_monthly_hours`, dan `department`. Tujuannya hanya sebagai keseragaman nama fitur, dan tidak ada typo pada nama fitur.
+
+#### 4.1.2. Missing Values
+Peneliti melakukan pengecekan missing values pada dataset. Namun tidak terdapat missing values pada dataset.
+
+#### 4.1.3. Data Duplikat
+Peneliti melakukan pengecekan data duplikat pada dataset. Penanganan data duplikat sangat penting, karena bisa menyebabkan bias, menghambar visualisasi dan analisis data, terutama pada model. Hasilnya, terdapat 3008 baris data yang duplikat. Peneliti melakukan penanganan pada data duplikat dengan cara menghapus data duplikat tersebut, karena data duplikat relatif sedikit.
+
+#### 4.1.4. Ubah Tipe Data
+Peneliti melakukan pengubahan tipe data pada dataset, agar dapat memudahkan analisis pada data. Adapun fitur yang diubah tipe datanya adalah sebagai berikut:
+- work_accident menjadi category
+- promotion_last_5years menjadi kategori
+- left menjadi category
+- department menjadi category
+- salary menjadi category
+
+#### 4.1.5. Deteksi Outlier 
+Peneliti melakukan pengecekan outlier pada fitur numerik dengan metode IQR. Ini penting karena outlier dapat mengganggu model. Hasilnya seperti pada gambar berikut ini.
+
+| ![Screenshot (144)](https://github.com/user-attachments/assets/365b06fe-6724-49a2-a3d2-895bd3f24a04) | 
+|:--:| 
+| *Pngecekan Outlier Pada Fitur Numerik* |
+
+Dari gambar tersebut, dapat dilihat ada outliers pada fitur `time_spend_company`. Data outliers nya berjumlah 824 data. Outlier yang terdapat pada dataset ini tidaklah ekstrem, dan bukan tipe anomali, melainkan pola alami dari dataset ini. Jadi peneliti memutuskan untuk melanjutkan analisis pada dataset ini.
 
 
+Awalnya, dataset ini terdiri atas 14999 baris. Kemudian, setelah proses pembersihan data, total data pada dataset ini adalah 11991 baris.
 
-Awalnya, dataset ini terdiri atas 14999 baris. Kemudian dilakukan pengecekan kualitas data, seperti data yang kosong (missing values), data duplikat, dan data outliers. Tidak ada data kosong pada dataset ini, namun terdapat data duplikat dan outliers pada dataset. Karena outliers pada data tidak extreme, maka peneliti tidak menangani outlier tersebut. Peneliti hanya menangani data duplikat pada dataset dengan cara menghapus data duplikat tersebut. Jadi seteleah proses pembersihan data, total data pada dataset ini adalah 11991 baris.
-
-### Exploratory Data Analysis (EDA)
+### 4.2. Univariate Analysis
+#### 
 
 Analisis eksplorasi dilakukan untuk memahami distribusi data dan hubungan antar fitur. Gambar distribusi fitur numerik dapat dilihat pada ![Gambar 1](img/1.png). Dari analisis ini, ditemukan bahwa fitur seperti **satisfaction_level**, **average_monthly_hours**, dan **time_spend_company** memiliki distribusi yang dapat dikaitkan dengan keputusan resign.
 
-Selain itu, analisis hubungan antar fitur dilakukan menggunakan scatterplot dan boxplot. Contohnya, hubungan antara **average_monthly_hours**, **satisfaction_level**, dan **left** ditampilkan pada [Gambar 9](img/9.png). Scatterplot ini menunjukkan bahwa karyawan dengan tingkat kepuasan rendah dan jam kerja tinggi cenderung resign.
+Selain itu, analisis hubungan antar fitur dilakukan menggunakan scatterplot dan boxplot. Contohnya, hubungan antara **average_monthly_hours**, **satisfaction_level**, dan **left** ditampilkan pada ![Gambar 9](img/9.png). Scatterplot ini menunjukkan bahwa karyawan dengan tingkat kepuasan rendah dan jam kerja tinggi cenderung resign.
 
 ## Data Preparation
 
