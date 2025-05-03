@@ -10,7 +10,9 @@ Masalah ini penting untuk diselesaikan karena tingkat turnover karyawan yang tin
 
 [1] M. Patterson, P. Warr, and M. West, “Organizational climate and company productivity: The role of employee affect and employee level,” Journal of Occupational and Organizational Psychology, vol. 77, no. 2, pp. 193–216, Jun. 2004, doi: https://doi.org/10.1348/096317904774202144.
 ‌
+
 [2] M. Faisal Qureshi, "HR Analytics and Job Prediction," Kaggle, 2023. [Online]. Available: https://www.kaggle.com/datasets/mfaisalqureshi/hr-analytics-and-job-prediction/data. [Accessed: 2023-10-01].
+
 
 [3]A. C. Glebbeek and E. H. Bax, “IS HIGH EMPLOYEE TURNOVER REALLY HARMFUL? AN EMPIRICAL TEST USING COMPANY RECORDS.,” Academy of Management Journal, vol. 47, no. 2, pp. 277–286, Apr. 2004, doi: https://doi.org/10.2307/20159578.
 ‌
@@ -49,7 +51,9 @@ Dataset yang digunakan merupakan dataset sekunder yang didapat dari situs Kaggle
 - **salary**: Tingkat gaji karyawan (low, medium, high).
 - **left**: Status resign karyawan (0: tidak, 1: iya).
 
-Adapun rangkuman dari dataset ini dapat dilihat pada gambar.
+Adapun rangkuman dari dataset ini dapat dilihat pada gambar berikut
+
+
 
 
 
