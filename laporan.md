@@ -108,7 +108,7 @@ Peneliti melakukan pengecekan outlier pada fitur numerik dengan metode IQR. Ini 
 
 | ![Screenshot (144)](https://github.com/user-attachments/assets/365b06fe-6724-49a2-a3d2-895bd3f24a04) | 
 |:--:| 
-| *Pngecekan Outlier Pada Fitur Numerik* |
+| *Cek Outlier Pada Fitur Numerik* |
 
 Dari gambar tersebut, dapat dilihat ada outliers pada fitur `time_spend_company`. Data outliers nya berjumlah 824 data. Outlier yang terdapat pada dataset ini tidaklah ekstrem, dan bukan tipe anomali, melainkan pola alami dari dataset ini. Jadi peneliti memutuskan untuk melanjutkan analisis pada dataset ini.
 
@@ -116,7 +116,36 @@ Dari gambar tersebut, dapat dilihat ada outliers pada fitur `time_spend_company`
 Awalnya, dataset ini terdiri atas 14999 baris. Kemudian, setelah proses pembersihan data, total data pada dataset ini adalah 11991 baris.
 
 ### 4.2. Univariate Analysis
-#### 
+
+Univariate analysis adalah analisis data yang hanya melibatkan satu variabel/ fitur. Fokus utamanya adalah untuk memahami karakteristik dasar dari variabel tersebut.
+
+#### 4.2.1. Categoricl Features
+##### 4.2.1.1. Fitur left
+
+| ![Screenshot (144)](https://github.com/user-attachments/assets/4f7a04c0-854d-4807-ad8e-155a7ccc86a4) | 
+|:--:| 
+| *Distribusi Pegawai yang Resign* |
+
+Dari grafik Distribusi pegawai Yang Resign dapat disimpulkan beberapa hal:
+- Jumlah pegawai yang **tidak resign** jauh lebih banyak dibandingkan dengan yang **resign**.
+- Jumlah pegawai yang **tidak resign** adalah **10000** dengan persentase **83.4**, sedangkan yang **resign** sekitar **1991** dengan persentase **16.6**.
+
+##### 4.2.1.2. Fitur work_accident
+
+| ![Screenshot (144)](https://github.com/user-attachments/assets/b9c6a2e5-e654-46bc-8dd8-68465f3ebdf6) | 
+|:--:| 
+| *Distribusi Pegawai yang Pernah Mengalami Kecelakaan Kerja* |
+
+
+
+
+
+
+
+
+
+
+
 
 Analisis eksplorasi dilakukan untuk memahami distribusi data dan hubungan antar fitur. Gambar distribusi fitur numerik dapat dilihat pada ![Gambar 1](img/1.png). Dari analisis ini, ditemukan bahwa fitur seperti **satisfaction_level**, **average_monthly_hours**, dan **time_spend_company** memiliki distribusi yang dapat dikaitkan dengan keputusan resign.
 
