@@ -691,7 +691,7 @@ Berdasarkan evaluasi, berikut adalah hasil kinerja model sebelum dan setelah tun
 Model **RandomForestClassifier** menunjukkan performa sangat baik untuk memprediksi apakah karyawan akan resign. Setelah tuning, model menjadi lebih seimbang dan mampu melakukan generalisasi lebih baik ke data test. Metrik seperti accuracy, F1-Score, precision, recall, dan confusion matrix menunjukkan bahwa model ini layak digunakan dalam pengambilan keputusan.
 
 
-## 8. Model Interpretatoin 
+## 8. Model Interpretation 
 Pada tahap ini, peneliti akan melakukan interpretasi hasil model dengan menggunakan metode features importance. 
 
 | ![Screenshot (144)](https://github.com/user-attachments/assets/e6931806-3e1d-4df9-8411-9de007589661) | 
@@ -712,8 +712,36 @@ Grafik ini menunjukkan seberapa besar kontribusi masing-masing fitur terhadap ke
 | 8 sampai 16    | **department\_* dan promotion\_last\_5years*\* | Semua fitur ini memiliki pengaruh yang sangat kecil terhadap prediksi. Menunjukkan bahwa faktor departemen dan promosi bukan penentu utama dalam model ini.           |
 
 ## 9. Kesimpulan dan Saran:
-- Fitur-fitur seperti departemen atau apakah pernah dipromosikan ternyata kurang relevan dalam konteks prediksi ini, menurut model Random Forest.
+
+### Kesimpulan
+1. **Faktor Utama Resign**:
+    - **Kepuasan Kerja Rendah**: Pegawai dengan tingkat kepuasan rendah memiliki kemungkinan resign yang tinggi.
+    - **Jam Kerja Tinggi**: Pegawai dengan jam kerja bulanan tinggi (>250 jam) cenderung resign karena burnout.
+    - **Kurangnya Promosi**: Pegawai yang tidak dipromosikan dalam 5 tahun terakhir lebih rentan resign.
+    - **Gaji Rendah**: Pegawai dengan gaji rendah memiliki tingkat resign yang jauh lebih tinggi dibandingkan dengan gaji menengah atau tinggi.
+    - **Masa Kerja 3–5 Tahun**: Pegawai dengan masa kerja 3–5 tahun memiliki risiko resign tertinggi.
+    - - Fitur-fitur seperti departemen atau apakah pernah dipromosikan ternyata kurang relevan dalam konteks prediksi ini, **menurut model Random Forest**.
+
+2. **Departemen dengan Tingkat Resign Tinggi**:
+    - **Sales**, **Technical**, dan **Support** memiliki jumlah resign tertinggi, kemungkinan karena tekanan kerja atau kurangnya jenjang karir.
+
+3. **Model Prediksi**:
+    - Model **RandomForestClassifier** dengan hyperparameter tuning memberikan akurasi tinggi (98.62%) dan dapat digunakan untuk memprediksi pegawai yang berisiko resign.
+
+### Saran
 - Fokus retensi pegawai bisa dimulai dari peningkatan kepuasan kerja, pengaturan beban kerja yang seimbang, dan pengakuan performa melalui promosi atau penghargaan.
+- Berikan program kesejahteraan, pelatihan, dan pengakuan untuk meningkatkan kepuasan kerja.
+- Fokus pada pegawai dengan kepuasan rendah untuk mencegah resign.
+- Kurangi jam kerja berlebih (>250 jam) untuk menghindari burnout.
+- Distribusikan proyek secara merata untuk menghindari underutilization atau overload.
+- Tingkatkan peluang promosi, terutama untuk pegawai dengan masa kerja 3–5 tahun.
+- Berikan insentif atau bonus untuk pegawai yang berprestasi.
+- Evaluasi ulang struktur gaji, terutama untuk pegawai dengan gaji rendah.
+- Berikan kenaikan gaji atau insentif tambahan untuk meningkatkan loyalitas.
+- Lakukan evaluasi mendalam pada departemen **Sales**, **Technical**, dan **Support** untuk mengidentifikasi penyebab resign.
+- Berikan pelatihan atau program pengembangan karir untuk meningkatkan retensi di departemen tersebut.
+
+Dengan langkah-langkah ini, perusahaan dapat meningkatkan retensi karyawan, mengurangi biaya turnover, dan menciptakan lingkungan kerja yang lebih produktif.
 
 ## Referensi
 
