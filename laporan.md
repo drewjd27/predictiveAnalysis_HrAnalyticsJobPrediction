@@ -425,7 +425,7 @@ Berikut adalah hasil **analisis** dan **insight** dari grafik scatter plot yang 
 
 #### 4.3.4. Analisis Matriks Korelasi
 
-Dalam tahap ini, sebelum melakukan analisis terhadap matriks korelasi, peneliti terlebih dahulu melakukan encoding pada data kategorikal. Ini karena agar peneliti dapat melihat korelasi seluruh fitur, termasuk data kategorikal yang sudah dilakukan encoding, terhadap fitur target, yaitu `left`. Encoding yang dilakukan oleh peneliti pada dataset ini adalah ordinal encoding, dan one hot encoding. One Hot Encoding diterapkan pada fitur `department`, karena nilai kategori pada fitur tersebut tidak memiliki urutan. Sedangkan Ordinal Encoding diterapkan pada fitur `salary`, karena memiliki urutan yang logis (`low` < `medium` < `high`). 
+Dalam tahap ini, sebelum melakukan analisis terhadap matriks korelasi, peneliti terlebih dahulu melakukan encoding pada data kategorikal. Ini karena agar peneliti dapat melihat korelasi seluruh fitur, termasuk data kategorikal yang sudah dilakukan encoding, terhadap fitur target, yaitu `left`. Selain itu, encoding perlu dilakukan agar data kategorikal diubah menjadi data numerikal, sehingga model dapat memproses data, karena model hanya dapat memproses data numerik saja. Encoding yang dilakukan oleh peneliti pada dataset ini adalah ordinal encoding, dan one hot encoding. One Hot Encoding diterapkan pada fitur `department`, karena nilai kategori pada fitur tersebut tidak memiliki urutan. Sedangkan Ordinal Encoding diterapkan pada fitur `salary`, karena memiliki urutan yang logis (`low` < `medium` < `high`). 
 
 Di bawah ini adalah code snippet yang dilakukan peneliti untuk melakukan encoding pada fitur `department` dan  `salary`.
 ```python
