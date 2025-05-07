@@ -517,6 +517,7 @@ Pada bagian **Data Preparation**, dilakukan beberapa tahapan penting untuk mempe
 - **One-Hot Encoding**: Kolom `department` diubah menjadi beberapa kolom biner (dummy variables), dengan satu kolom di-drop untuk menghindari multikolinearitas.
 - Kolom kategorikal lainnya (`work_accident`, `promotion_last_5years`, `left`) diubah menjadi tipe integer.
 - Encoding perlu dilakukan agar data kategorikal diubah menjadi data numerikal, sehingga model dapat memproses data, karena model hanya dapat memproses data numerik saja.
+- Encoding juga dilakukan agar peneliti dapat melihat korelasi seluruh fitur, termasuk data kategorikal yang sudah dilakukan encoding, terhadap fitur target, yaitu `left`.
 
 Di bawah ini adalah code snippet yang dilakukan peneliti untuk melakukan encoding pada fitur `department` dan  `salary`.
 ```python
