@@ -478,7 +478,45 @@ Berikut beberapa insight penting terhadap `left`:
    `salary`
 
 ## 5. Data Preparation
-### 5.1. Train-Test Split 
+Pada bagian **Data Preparation**, dilakukan beberapa tahapan penting untuk mempersiapkan data sebelum digunakan dalam proses modeling. Berikut adalah tahapan-tahapan yang dilakukan:
+
+### 5.1. Ubah Nama Kolom
+- Nama kolom diubah menjadi huruf kecil seluruhnya untuk konsistensi.
+  - Typo pada nama kolom diperbaiki, contohnya:
+    - `average_montly_hours` → `average_monthly_hours`
+    - `Work_accident` → `work_accident`
+    - `Department` → `department`
+
+### 5.2. Missing Values
+- Dilakukan pengecekan terhadap nilai kosong (missing values) pada dataset.
+- Hasilnya menunjukkan **tidak ada missing values**, sehingga tidak diperlukan langkah imputasi atau penghapusan data.
+
+### 5.3. Data Duplikat
+- Dataset diperiksa untuk mendeteksi data duplikat.
+- Ditemukan **3008 baris duplikat** (20,05% dari total data), yang kemudian dihapus.
+- Setelah penghapusan, dataset menyisakan **11.991 baris data**.
+
+### 5.4. Ubah Tipe Data
+- Beberapa kolom diubah menjadi tipe data yang sesuai untuk memudahkan analisis dan proses encoding:
+- Pada tahap EDA, kolom `department`, `salary`, `work_accident`, `promotion_last_5years`, dan `left` diubah menjadi tipe kategorikal untuk memudahkan peneliti menganalisis data.
+- Kemudian saat selesai tahap EDA, dan menuju tahap encoding, peneliti mengubah kolom `work_accident`, `promotion_last_5years`, dan `left` menjadi tipe integer.
+
+### 5.5. Outliers
+- Dilakukan pengecekan distribusi data numerik menggunakan boxplot.
+- Terdapat outliers pada kolom `time_spend_company`, tetapi karena tidak ekstrem, outliers dibiarkan untuk menjaga pola data.
+
+### 5.6. Encoding
+- Data kategorikal diubah menjadi format numerik agar dapat digunakan oleh algoritma machine learning:
+- **Ordinal Encoding**: Kolom `salary` diubah menjadi nilai ordinal berdasarkan urutan `low`, `medium`, `high`.
+- **One-Hot Encoding**: Kolom `department` diubah menjadi beberapa kolom biner (dummy variables), dengan satu kolom di-drop untuk menghindari multikolinearitas.
+- Kolom kategorikal lainnya (`work_accident`, `promotion_last_5years`, `left`) diubah menjadi tipe integer.
+
+### 5.6. Pemisahan Fitur
+- Dataset dipisahkan menjadi dua bagian:
+  - **Fitur (X)**: Semua kolom kecuali kolom target `left`.
+  - **Target (y)**: Kolom `left`, yang menunjukkan apakah karyawan resign (1) atau tidak (0).
+
+### 5.7. Train-Test Split 
 Tahap ini adalah proses membagi dataset menjadi Training Set untuk melatih model, dan Testing Set untuk menguji performa model untuk memastikan model dapat diandalkan pada data baru. 
 Tahap ini penting karena beberapa hal, yaitu:
 - **Evaluasi Generalisasi**: Mengukur kemampuan model pada data baru.
@@ -514,26 +552,15 @@ Pada tahap pemodelan, dilakukan pengembangan tiga algoritma klasifikasi, yaitu:
 1. **Gaussian Naive Bayes (GaussianNB)**:
     - Algoritma ini menggunakan pendekatan probabilistik berdasarkan Teorema Bayes.
     - Tidak memerlukan banyak parameter untuk diatur, sehingga cocok untuk baseline model.
-    - **Parameter yang digunakan**: Tidak ada parameter khusus yang diatur.
+    - **Parameter yang digunakan**: `default`
 
 2. **Random Forest Classifier (RandomForestClassifier)**:
     - Algoritma ensemble berbasis pohon keputusan.
-    - **Parameter utama yang digunakan**:
-      - `n_estimators`: 100 (jumlah pohon dalam hutan).
-      - `max_depth`: None (kedalaman maksimum pohon tidak dibatasi).
-      - `min_samples_split`: 2 (jumlah minimum sampel untuk membagi simpul).
-      - `min_samples_leaf`: 1 (jumlah minimum sampel di daun simpul).
-      - `random_state`: 42 (untuk memastikan hasil yang konsisten).
+    - **Parameter utama yang digunakan**: `default`. Peneliti juga menggunakan `random_state` dengan nilai 42 untuk memastikan hasil yang konsisten.
 
 3. **Extreme Gradient Boosting (XGBoost)**:
     - Algoritma boosting berbasis pohon keputusan.
-    - **Parameter utama yang digunakan**:
-      - `learning_rate`: 0.1 (kecepatan pembelajaran).
-      - `n_estimators`: 100 (jumlah pohon).
-      - `max_depth`: 6 (kedalaman maksimum pohon).
-      - `eval_metric`: 'logloss' (metrik evaluasi untuk optimasi).
-      - `random_state`: 42 (untuk memastikan hasil yang konsisten).
-
+    - **Parameter utama yang digunakan**: `default`. Peneliti juga menggunakan `random_state` dengan nilai 42 untuk memastikan hasil yang konsisten.
 ### Kelebihan dan Kekurangan Algoritma
 1. **Gaussian Naive Bayes**:
     - **Kelebihan**:
