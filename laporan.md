@@ -515,6 +515,11 @@ Pada bagian **Data Preparation**, dilakukan beberapa tahapan penting untuk mempe
 - Dataset dipisahkan menjadi dua bagian:
   - **Fitur (X)**: Semua kolom kecuali kolom target `left`.
   - **Target (y)**: Kolom `left`, yang menunjukkan apakah karyawan resign (1) atau tidak (0).
+Berikut ini adalah code snippet dalam melakukan pemisahan fitur pada dataset penelitian ini.
+```python
+X = df_encoded.drop(columns='left')
+y = df_encoded['left']
+```
 
 ### 5.7. Train-Test Split 
 Tahap ini adalah proses membagi dataset menjadi Training Set untuk melatih model, dan Testing Set untuk menguji performa model untuk memastikan model dapat diandalkan pada data baru. 
@@ -525,11 +530,6 @@ Tahap ini penting karena beberapa hal, yaitu:
 
 Peneliti melakukan pembagian data Train-Test dengan ratio 80% : 20%. Berikut ini adalah code snippet dalam melakukan train-test split pada penelitian ini.
 ```python
-# 1. Pisahkan fitur (X) dan target (y)
-X = df_encoded.drop(columns='left')
-y = df_encoded['left']
-
-# 2. Lakukan pembagian data (misalnya 80% untuk train dan 20% untuk test)
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
