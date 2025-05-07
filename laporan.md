@@ -482,19 +482,19 @@ Pada bagian **Data Preparation**, dilakukan beberapa tahapan penting untuk mempe
 
 ### 5.1. Ubah Nama Kolom
 - Nama kolom diubah menjadi huruf kecil seluruhnya untuk konsistensi.
-  - Typo pada nama kolom diperbaiki, contohnya:
-    - `average_montly_hours` → `average_monthly_hours`
-    - `Work_accident` → `work_accident`
-    - `Department` → `department`
+- Typo pada nama kolom diperbaiki, contohnya:
+  - `average_montly_hours` → `average_monthly_hours`
+  - `Work_accident` → `work_accident`
+  - `Department` → `department`
 
 ### 5.2. Missing Values
-- Dilakukan pengecekan terhadap nilai kosong (missing values) pada dataset.
+- Dilakukan pengecekan terhadap nilai kosong (missing values) pada dataset. Penanganan missing values pada data sangat penting, karena data yang tidak lengkap bisa memengaruhi kualitas dan akurasi model yang dibangun
 - Hasilnya menunjukkan **tidak ada missing values**, sehingga tidak diperlukan langkah imputasi atau penghapusan data.
 
 ### 5.3. Data Duplikat
 - Dataset diperiksa untuk mendeteksi data duplikat.
-- Ditemukan **3008 baris duplikat** (20,05% dari total data), yang kemudian dihapus.
-- Setelah penghapusan, dataset menyisakan **11.991 baris data**.
+- Ditemukan **3008 baris duplikat** (20,05% dari total data), yang kemudian dihapus. Penanganan data duplikat sangat penting, karena bisa menyebabkan bias, menghambat visualisasi dan analisis data, terutama pada model.
+- Setelah penghapusan data duplikat, dataset menyisakan **11.991 baris data**.
 
 ### 5.4. Ubah Tipe Data
 - Beberapa kolom diubah menjadi tipe data yang sesuai untuk memudahkan analisis dan proses encoding:
@@ -502,16 +502,45 @@ Pada bagian **Data Preparation**, dilakukan beberapa tahapan penting untuk mempe
 - Kemudian saat selesai tahap EDA, dan menuju tahap encoding, peneliti mengubah kolom `work_accident`, `promotion_last_5years`, dan `left` menjadi tipe integer.
 
 ### 5.5. Outliers
-- Dilakukan pengecekan distribusi data numerik menggunakan boxplot.
+- Dilakukan pengecekan distribusi data numerik menggunakan boxplot. Ini penting karena outlier dapat mengganggu model.
 - Terdapat outliers pada kolom `time_spend_company`, tetapi karena tidak ekstrem, outliers dibiarkan untuk menjaga pola data.
+- Boxplot dapat dilihat di bawah ini
+
+| ![Screenshot (144)](https://github.com/user-attachments/assets/365b06fe-6724-49a2-a3d2-895bd3f24a04) | 
+|:--:| 
+| *Cek Outlier Pada Fitur Numerik* |
+
 
 ### 5.6. Encoding
 - Data kategorikal diubah menjadi format numerik agar dapat digunakan oleh algoritma machine learning:
 - **Ordinal Encoding**: Kolom `salary` diubah menjadi nilai ordinal berdasarkan urutan `low`, `medium`, `high`.
 - **One-Hot Encoding**: Kolom `department` diubah menjadi beberapa kolom biner (dummy variables), dengan satu kolom di-drop untuk menghindari multikolinearitas.
 - Kolom kategorikal lainnya (`work_accident`, `promotion_last_5years`, `left`) diubah menjadi tipe integer.
+- Encoding perlu dilakukan agar data kategorikal diubah menjadi data numerikal, sehingga model dapat memproses data, karena model hanya dapat memproses data numerik saja.
+
+Di bawah ini adalah code snippet yang dilakukan peneliti untuk melakukan encoding pada fitur `department` dan  `salary`.
+```python
+# Data Encoding
+# Salin dataframe
+df_encoded = df_cleaned.copy()
+
+# Ordinal encoding untuk salary
+salary_order = ['low', 'medium', 'high']
+ordinal_enc = OrdinalEncoder(categories=[salary_order])
+df_encoded['salary'] = ordinal_enc.fit_transform(df_cleaned[['salary']])
+
+# One-hot encoding untuk department
+df_encoded = pd.get_dummies(df_encoded, columns=['department'], drop_first=True)
+
+# Optional: ubah kategori lain ke integer (jika belum)
+for col in ['work_accident', 'promotion_last_5years', 'left']:
+    df_encoded[col] = df_encoded[col].astype(int)
+
+df_encoded.head()
+```
 
 ### 5.6. Pemisahan Fitur
+- Ini penting agar model tau untuk mempelajari fitur apa (X), dan memprediksi fitur apa (y).
 - Dataset dipisahkan menjadi dua bagian:
   - **Fitur (X)**: Semua kolom kecuali kolom target `left`.
   - **Target (y)**: Kolom `left`, yang menunjukkan apakah karyawan resign (1) atau tidak (0).
